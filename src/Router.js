@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './Pages/MainPage/MainPage';
-import UserInfo from './Pages/UserInfoPage/UserInfoPage';
-import Weather from './Pages/WeatherDetailPage/WeatherDetailPage';
-import Community from './Pages/CommunityPage/CommunityPage';
-import Coordi from './Pages/CoordiPage/CoordiPage';
-import UploadCoordi from './Pages/UploadCoordiPage/UploadCoordiPage';
-import CoordiDetail from './Pages/CoordiDetailPage/CoordiDetailPage';
-import LiveTalk from './Pages/LiveTalkPage/LiveTalkPage';
+import Main from './pages/MainPage/MainPage';
+import UserInfo from './pages/UserInfoPage/UserInfoPage';
+import Weather from './pages/WeatherDetailPage/WeatherDetailPage';
+import Community from './pages/CommunityPage/CommunityPage';
+import Coordi from './pages/CoordiPage/CoordiPage';
+import UploadCoordi from './pages/UploadCoordiPage/UploadCoordiPage';
+import CoordiDetail from './pages/CoordiDetailPage/CoordiDetailPage';
+import LiveTalk from './pages/LiveTalkPage/LiveTalkPage';
 
 const Router = () => {
   return (
