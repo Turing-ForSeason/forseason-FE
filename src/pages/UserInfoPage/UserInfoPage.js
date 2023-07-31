@@ -1,7 +1,8 @@
 import React from 'react';
+import MyPage from '../../components/UserInfo/MyPage';
 
 function UserInfo() {
-  return <h1>마이 페이지</h1>;
+  return <MyPage />;
 }
 
 export default UserInfo;
