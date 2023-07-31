@@ -1,0 +1,268 @@
+.myPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.myPageWrap {
+  display: flex;
+}
+
+.myPageNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 286px;
+  box-shadow: 1px 0 0 #898989;
+}
+
+.container1 {
+  display: flex;
+  width: 260px;
+  height: 89px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.blankItem {
+  display: flex;
+  height: 41px;
+}
+
+.container1_font {
+  color: #000;
+  font-family: Almarai;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.9px;
+}
+
+.button_box {
+  display: flex;
+  width: 260px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.button_box:hover {
+  background: #e6e6e6;
+  display: flex;
+  width: 260px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button_font {
+  display: flex;
+  color: #000;
+  font-family: Almarai;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+}
+
+.myPageContent {
+  display: flex;
+  width: 994px;
+  flex-direction: column;
+}
+
+.contentContainer1 {
+  display: flex;
+  height: 788px;
+}
+
+.contentItem1 {
+  width: 380px;
+}
+
+.contentItem2 {
+  width: 614px;
+}
+
+.blankItem2 {
+  height: 46px;
+}
+
+.profilePicture {
+  display: flex;
+  width: 380px;
+  height: 380px;
+  justify-content: center;
+  align-items: center;
+}
+
+.profilePictureBox {
+  width: 295px;
+  height: 295px;
+  border-radius: 70%;
+  overflow: hidden;
+  background: #bdbdbd;
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blankItem3 {
+  height: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button2 {
+  display: flex;
+  width: 295px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #c2d1ff;
+}
+
+.button_font2 {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.contentContainer2 {
+  display: flex;
+  flex-direction: column;
+  width: 878px;
+  height: 60px;
+  border-radius: 15px;
+  border: 1px solid #b3b3b3;
+  background: #f4f4f4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.textBox {
+  display: flex;
+  width: 295px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textLine {
+  display: flex;
+  align-items: flex-end;
+}
+
+.button_font3 {
+  color: #000;
+  text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: Inter;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.button_font4 {
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.button_font5 {
+  color: #818181;
+  text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.blankItem4 {
+  height: 42px;
+}
+
+.numberBox {
+  display: flex;
+  align-items: center;
+  width: 540px;
+  height: 140px;
+  border-radius: 15px;
+  border: 1px solid #b3b3b3;
+  background: #f4f4f4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.numberBox2 {
+  display: flex;
+  width: 270px;
+  height: 140px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textBox2 {
+  display: flex;
+  width: 269px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #696969;
+  text-align: center;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.textBox3 {
+  display: flex;
+  width: 269px;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+  color: #3a3a3a;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.line {
+  width: 1px;
+  height: 120px;
+  background: #848484;
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
