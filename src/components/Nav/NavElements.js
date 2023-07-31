@@ -78,6 +78,17 @@ export const NavBtn = styled.nav`
   }
 `;
 
+export const Button = styled.button`
+width: 100%
+height: 100%;
+border: 0;
+background-color: #fff;
+&:hover {
+  transition: all 0.2s ease-in-out;
+  color: #38a0ff;
+}
+`;
+
 export const NavBtnLink = styled(Link)`
   border-radius: 20px;
   background: #f2f2f2;
