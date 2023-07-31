@@ -1,0 +1,21 @@
+.modal-content {
+  width: 400px !important;
+  height: 500px !important;
+}
+
+.modal-dialog {
+  width: 400px !important;
+  margin: 0 auto !important;
+}
+
+.modal-footer {
+  align-items: center;
+  flex-direction: column;
+}
+.modal-footer p {
+  margin-bottom: 10px;
+}
+
+.h4 {
+  font-family: 'Koulen', sans-serif;
+}

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { React, useState } from 'react';
 import {
   Nav,
   NavLogo,
@@ -8,9 +7,13 @@ import {
   NavMenu,
   NavBtn,
   NavBtnLink,
+  Button,
 } from './NavElements';
+import SignUpModal from '../Modal/SignUpModal';
 
 const Navbar = () => {
+  const [SignUpModalOn, setSignUpModalOn] = useState(false);
+
   return (
     <Nav>
       <NavLogo to="/" activeStyle>
@@ -38,12 +41,15 @@ const Navbar = () => {
         </NavLink>
       </NavMenu>
       <NavBtn>
-        <NavBtnLink to="/" activeStyle>
-          로그인
+        <NavBtnLink>
+          <Button variant="secondary" onClick={() => setSignUpModalOn(true)}>
+            로그인
+          </Button>
         </NavBtnLink>
-        <NavBtnLink to="/" activeStyle>
-          마이페이지
-        </NavBtnLink>
+        <SignUpModal
+          show={SignUpModalOn}
+          onHide={() => setSignUpModalOn(false)}
+        />
       </NavBtn>
     </Nav>
   );
