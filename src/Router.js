@@ -2,6 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './pages/MainPage/MainPage';
 import UserInfo from './pages/UserInfoPage/UserInfoPage';
+import EditProfile from './pages/EditProfilePage/EditProfilePage';
+import MyBoard from './pages/MyBoardPage/MyBoardPage';
+import MyComment from './pages/MyCommentPage/MyCommentPage';
 import Weather from './pages/WeatherDetailPage/WeatherDetailPage';
 import Community from './pages/CommunityPage/CommunityPage';
 import Coordi from './pages/CoordiPage/CoordiPage';
@@ -15,6 +18,9 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/mypage" element={<UserInfo />} />
+        <Route path="/mypage/editprofile" element={<EditProfile />} />
+        <Route path="/mypage/myboard" element={<MyBoard />} />
+        <Route path="/mypage/mycomment" element={<MyComment />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/community" element={<Community />} />
         <Route path="/community/coordi" element={<Coordi />} />
