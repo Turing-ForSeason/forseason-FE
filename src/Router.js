@@ -10,6 +10,8 @@ import Community from './pages/CommunityPage/CommunityPage';
 import Coordi from './pages/CoordiPage/CoordiPage';
 import UploadCoordi from './pages/UploadCoordiPage/UploadCoordiPage';
 import CoordiDetail from './pages/CoordiDetailPage/CoordiDetailPage';
+import LiveTalkList from './pages/LiveTalkPage/LiveTalkList';
+import LiveTalkRoom from './pages/LiveTalkPage/LiveTalkRoom';
 import LiveTalk from './pages/LiveTalkPage/LiveTalkPage';
 
 const Router = () => {
@@ -29,7 +31,8 @@ const Router = () => {
           path="/community/coordi/detail/:boardId"
           element={<CoordiDetail />}
         />
-        <Route path="/community/livetalk" element={<LiveTalk />} />
+        <Route path="/community/livetalk/talklist" element={<LiveTalkList />} />
+        <Route path="/community/livetalk/talkroom/:roomLocation" element={<LiveTalkRoom/>}/>
       </Routes>
     </BrowserRouter>
   );
