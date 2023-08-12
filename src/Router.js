@@ -14,11 +14,17 @@ import LiveTalkList from './pages/LiveTalkPage/LiveTalkList';
 import LiveTalkRoom from './pages/LiveTalkPage/LiveTalkRoom';
 import LiveTalk from './pages/LiveTalkPage/LiveTalkPage';
 
+import TestLogin from './pages/TestPage/TestLogin';
+
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
+        {/* 잠깐 바꿀게용 */}
+        {/* <Route path="/" element={<Main />} /> */}
+        <Route path="/" element={<TestLogin />} />
+
+
         <Route path="/mypage" element={<UserInfo />} />
         <Route path="/mypage/editprofile" element={<EditProfile />} />
         <Route path="/mypage/myboard" element={<MyBoard />} />
@@ -32,7 +38,7 @@ const Router = () => {
           element={<CoordiDetail />}
         />
         <Route path="/community/livetalk/talklist" element={<LiveTalkList />} />
-        <Route path="/community/livetalk/talkroom/:roomLocation" element={<LiveTalkRoom/>}/>
+        <Route path="/community/livetalk/talkroom/:location" element={<LiveTalkRoom />} />
       </Routes>
     </BrowserRouter>
   );
