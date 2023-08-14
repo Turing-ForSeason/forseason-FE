@@ -17,6 +17,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/community/livetalk" element={<TestLogin />} />
         <Route path="/mypage" element={<UserInfo />} />
         <Route path="/mypage/editprofile" element={<EditProfile />} />
         <Route path="/mypage/myboard" element={<MyBoard />} />
@@ -29,7 +30,11 @@ const Router = () => {
           path="/community/coordi/detail/:boardId"
           element={<CoordiDetail />}
         />
-        <Route path="/community/livetalk" element={<LiveTalk />} />
+        <Route path="/community/livetalk/talklist" element={<LiveTalkList />} />
+        <Route
+          path="/community/livetalk/talkroom/:location"
+          element={<LiveTalkRoom />}
+        />
       </Routes>
     </BrowserRouter>
   );
