@@ -35,7 +35,7 @@ function LiveTalkRoom(props) {
   const userProfilePicture = useRef('');
 
   const page = useRef(0);
-  const prevMessage = useRef(null);
+  // const prevMessage = useRef(null);
 
   const searchLocation = useLocation();
   const locationPathname = searchLocation.pathname;
@@ -244,12 +244,7 @@ function LiveTalkRoom(props) {
     } else if (props.chat.type === 'MINE') {
       message = <OtherMessage chat={props.chat} />;
     }
-    return (
-      <div>
-        <DateBar chat={props.chat} />
-        {message}
-      </div>
-    );
+    return <div>{message}</div>;
   };
 
   const MyMessage = props => {
@@ -316,8 +311,6 @@ function LiveTalkRoom(props) {
   };
 
   const DateBar = props => {
-    let DateBarElement = null;
-    const prevMessageCurrent = prevMessage.current;
     let currentDate = new Date(props.chat.date);
     let currentStringDate =
       String(currentDate.getFullYear()) +
@@ -327,35 +320,7 @@ function LiveTalkRoom(props) {
       String(currentDate.getDate()) +
       '일';
 
-    if (prevMessageCurrent === null) {
-      DateBarElement = (
-        <div className="dateBarElement">
-          <FontAwesomeIcon icon={faCalendarDays} size="sm" />
-          {currentStringDate}
-        </div>
-      );
-    } else {
-      let prevDate = new Date(prevMessageCurrent.date);
-      let prevStringDate =
-        String(prevDate.getFullYear()) +
-        '년 ' +
-        String(prevDate.getMonth() + 1) +
-        '월 ' +
-        String(prevDate.getDate()) +
-        '일';
-
-      if (currentStringDate !== prevStringDate) {
-        DateBarElement = (
-          <div className="dateBarElement">
-            <FontAwesomeIcon icon={faCalendarDays} size="sm" />
-            {currentStringDate}
-          </div>
-        );
-      }
-    }
-
-    prevMessage.current = props.chat;
-    return DateBarElement;
+    return <div className="dateBarElement"> {currentStringDate} </div>;
   };
 
   const RoomHead = props => {
@@ -397,8 +362,15 @@ function LiveTalkRoom(props) {
           </InfoWrap>
 
           <ul className="messageArea" ref={scrollRef}>
-            {messages.map(message => (
-              <MessageArea key={message.id} chat={message} />
+            {messages.map((message, index) => (
+              <React.Fragment key={message.id}>
+                {index === 0 ||
+                new Date(messages[index - 1].date).toDateString() !==
+                  new Date(message.date).toDateString() ? (
+                  <DateBar chat={message} />
+                ) : null}
+                <MessageArea chat={message} />
+              </React.Fragment>
             ))}
           </ul>
 
