@@ -10,7 +10,9 @@ import Community from './pages/CommunityPage/CommunityPage';
 import Coordi from './pages/CoordiPage/CoordiPage';
 import UploadCoordi from './pages/UploadCoordiPage/UploadCoordiPage';
 import CoordiDetail from './pages/CoordiDetailPage/CoordiDetailPage';
-import LiveTalk from './pages/LiveTalkPage/LiveTalkPage';
+import TestLogin from './pages/TestPage/TestLogin';
+import LiveTalkList from './pages/LiveTalkPage/LiveTalkList';
+import LiveTalkRoom from './pages/LiveTalkPage/LiveTalkRoom';
 
 const Router = () => {
   return (
