@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-const KakaoAuthHandle = props => {
+
+function KakaoAuthHandle(props) {
   useEffect(() => {
     let code = new URL(window.location.href).searchParams.get('code');
     const kakaoLogin = async () => {
@@ -21,5 +22,5 @@ const KakaoAuthHandle = props => {
       <div>로그인 중입니다. 잠시만 기다려주세요.</div>
     </>
   );
-};
+}
 export default KakaoAuthHandle;

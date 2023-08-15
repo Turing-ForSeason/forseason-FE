@@ -35,6 +35,7 @@ function LiveTalkRoom(props) {
   const userProfilePicture = useRef('');
 
   const page = useRef(0);
+  const token = localStorage.getItem('token');
   // const prevMessage = useRef(null);
 
   const searchLocation = useLocation();
@@ -45,6 +46,9 @@ function LiveTalkRoom(props) {
     // userCount를 갱신해주는 함수
     axios
       .get('http://localhost:8080/talk/room/userCount', {
+        headers: {
+          Authorization: `${token}`,
+        },
         params: {
           location: roomLocation.current,
         },
@@ -61,6 +65,9 @@ function LiveTalkRoom(props) {
     // page를 이용하여 이전 채팅 기록들을 DB로부터 가져오는 함수
     axios
       .get('http://localhost:8080/talk/talks', {
+        headers: {
+          Authorization: `${token}`,
+        },
         params: {
           page: page.current,
           location: roomLocation.current,
@@ -83,6 +90,9 @@ function LiveTalkRoom(props) {
     // 사용자의 닉네임과 프사를 DB로부터 불러와서 변수에 저장해줌
     axios
       .get('http://localhost:8080/talk/user/init', {
+        headers: {
+          Authorization: `${token}`,
+        },
         params: {
           location: roomLocation.current,
           userUUID: userUUID.current,
@@ -114,7 +124,7 @@ function LiveTalkRoom(props) {
 
       stompClient.current.send(
         '/pub/talk/sendMessage',
-        {},
+        { Authorization: `${token}` },
         JSON.stringify(chatMessage),
       );
       setMessageContent('');
@@ -134,6 +144,7 @@ function LiveTalkRoom(props) {
     // 에러메세지 받았을때
     if (payload !== null) {
       //   const errorResponse = JSON.parse(payload.body);
+      console.log('연결 실패!');
       console.log(payload);
       console.log(payload.body.code);
       console.log(payload.body.message);
@@ -142,6 +153,9 @@ function LiveTalkRoom(props) {
     // Handle errors and cleanup
     axios
       .post('http://localhost:8080/talk/user/delete', {
+        headers: {
+          Authorization: `${token}`,
+        },
         location: roomLocation.current,
         userUUID: userUUID.current,
       })
@@ -155,12 +169,13 @@ function LiveTalkRoom(props) {
     stompClient.current.subscribe(
       `/sub/talk/room/${roomLocation.current}`,
       onMessageReceived,
+      { Authorization: `${token}` },
     );
 
     // 입장 메세지 날리기
     stompClient.current.send(
       '/pub/talk/enter',
-      {},
+      { Authorization: `${token}` },
       JSON.stringify({
         type: 'ENTER',
         location: roomLocation.current,
@@ -191,6 +206,7 @@ function LiveTalkRoom(props) {
     roomLocation.current = decodeURIComponent(
       locationPathname.split('/').pop(),
     );
+    console.log(roomLocation.current);
 
     // stompClient 초기화 (소켓)
     let socket = new SockJS('http://localhost:8080/stomp/talk');
@@ -199,14 +215,18 @@ function LiveTalkRoom(props) {
     if (stompClient.current !== null) {
       // 연결
       console.log('stompClient 설정 됨');
-      stompClient.current.connect({}, onConnect, onError);
+      stompClient.current.connect(
+        { Authorization: `${token}` },
+        onConnect,
+        onError,
+      );
     }
 
     return () => {
       if (stompClient.current) {
         stompClient.current.send(
           '/pub/talk/leave',
-          {},
+          { Authorization: `${token}` },
           JSON.stringify({
             type: 'LEAVE',
             location: roomLocation.current,
@@ -242,7 +262,7 @@ function LiveTalkRoom(props) {
         message = <OtherMessage chat={props.chat} />;
       }
     } else if (props.chat.type === 'MINE') {
-      message = <OtherMessage chat={props.chat} />;
+      message = <MyMessage chat={props.chat} />;
     }
     return <div>{message}</div>;
   };
