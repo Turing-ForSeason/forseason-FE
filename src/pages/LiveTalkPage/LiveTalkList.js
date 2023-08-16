@@ -24,8 +24,7 @@ function LiveTalkList() {
         setRoomList(response.data.result);
       })
       .catch(error => {
-        console.error('Error fetching room data:', error);
-        alert('권한이 없습니다.');
+        alert(error.response.data.message);
         window.location.href = '/';
       });
   }, []);
@@ -49,7 +48,8 @@ function LiveTalkList() {
         );
       })
       .catch(error => {
-        console.log(error.data.code);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 

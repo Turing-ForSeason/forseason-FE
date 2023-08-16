@@ -36,7 +36,6 @@ function LiveTalkRoom(props) {
 
   const page = useRef(0);
   const token = localStorage.getItem('token');
-  // const prevMessage = useRef(null);
 
   const searchLocation = useLocation();
   const locationPathname = searchLocation.pathname;
@@ -57,7 +56,8 @@ function LiveTalkRoom(props) {
         setUserCount(response.data.result.userCount);
       })
       .catch(error => {
-        console.error('Fail to update userCount', error);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 
@@ -81,7 +81,8 @@ function LiveTalkRoom(props) {
         page.current += 1;
       })
       .catch(error => {
-        console.error('Failed to get talk records: ', error);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 
@@ -103,7 +104,8 @@ function LiveTalkRoom(props) {
         userProfilePicture.current = response.data.result.userProfilePicture;
       })
       .catch(error => {
-        console.error('Failed to initialize user: ', error);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 
@@ -143,25 +145,18 @@ function LiveTalkRoom(props) {
   const onError = payload => {
     // 에러메세지 받았을때
     if (payload !== null) {
-      //   const errorResponse = JSON.parse(payload.body);
+      const errorResponse = JSON.parse(payload.body);
       console.log('연결 실패!');
-      console.log(payload);
-      console.log(payload.body.code);
-      console.log(payload.body.message);
+      alert(errorResponse.message);
     }
-
     // Handle errors and cleanup
     axios
       .post('http://localhost:8080/talk/user/delete', {
-        headers: {
-          Authorization: `${token}`,
-        },
         location: roomLocation.current,
         userUUID: userUUID.current,
       })
-      .catch(error => {
-        console.error('Failed to delete user: ', error);
-      });
+      .catch(error => {});
+    window.location.href = '/';
   };
 
   const onConnect = () => {
@@ -188,11 +183,9 @@ function LiveTalkRoom(props) {
     );
 
     // Initialize user
-    console.log('initUser' + roomLocation.current);
     initUser();
 
     // Load previous messages
-    console.log('getTalkRecords' + userUUID.current);
     getTalkRecords();
   };
 

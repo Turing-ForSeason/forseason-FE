@@ -7,9 +7,6 @@ import { Route, Routes, Link, useLocation } from 'react-router-dom';
 import KakaoAuthHandle from '../../components/Modal/KakaoAuthHandle.js';
 
 function Main() {
-  // JWT 토큰 초기화
-  // localStorage.setItem('token', null);
-
   return (
     <div className="mainPage">
       <Navbar />
