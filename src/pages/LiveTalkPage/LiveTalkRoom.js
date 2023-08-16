@@ -70,6 +70,7 @@ function LiveTalkRoom(props) {
         },
         params: {
           page: page.current,
+          size: 100,
           location: roomLocation.current,
           userUUID: userUUID.current,
         },
