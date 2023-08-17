@@ -33,7 +33,7 @@ const Navbar = () => {
         <NavLink to="/community/coordi/upload" activeStyle>
           코디 업로드
         </NavLink>
-        <NavLink to="/community/livetalk" activeStyle>
+        <NavLink to="/community/livetalk/talklist" activeStyle>
           Live Talk
         </NavLink>
         <NavLink to="/mypage" activeStyle>

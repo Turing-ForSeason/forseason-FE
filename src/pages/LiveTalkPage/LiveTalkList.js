@@ -7,14 +7,16 @@ import Navbar from '../../components/Nav/Nav';
 import Footer from '../../components/Footer/Footer';
 
 function LiveTalkList() {
+  const token = localStorage.getItem('token');
+
   const [roomList, setRoomList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get('http://localhost:8080/talk/rooms', {
-        params: {
-          userId: localStorage.getItem('userId'),
+        headers: {
+          Authorization: `${token}`,
         },
       })
       .then(response => {
@@ -22,16 +24,19 @@ function LiveTalkList() {
         setRoomList(response.data.result);
       })
       .catch(error => {
-        console.error('Error fetching room data:', error);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   }, []);
 
   const onClickEnter = roomLocation => {
     axios
       .get('http://localhost:8080/talk/room', {
+        headers: {
+          Authorization: `${token}`,
+        },
         params: {
           location: roomLocation,
-          userId: localStorage.getItem('userId'),
         },
       })
       .then(response => {
@@ -43,7 +48,8 @@ function LiveTalkList() {
         );
       })
       .catch(error => {
-        console.log(error.data.code);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 

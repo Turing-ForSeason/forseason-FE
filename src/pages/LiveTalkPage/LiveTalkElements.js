@@ -82,6 +82,14 @@ export const Location = styled.div`
   svg {
     padding: 0 4px;
   }
+  a {
+    text-decoration: none;
+    color: black !important;
+  }
+
+  a:hover {
+    color: lightgrey !important;
+  }
 `;
 
 export const UserCount = styled.div`
