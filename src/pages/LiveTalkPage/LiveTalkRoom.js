@@ -343,7 +343,9 @@ function LiveTalkRoom(props) {
       <Info>
         <Location>
           <FontAwesomeIcon icon={faLocationCrosshairs} />
-          <h5> {roomLocationCurrent}</h5>
+          <a href="/community/livetalk/talklist">
+            <h5> {roomLocationCurrent}</h5>
+          </a>
         </Location>
         <UserCount>
           <FontAwesomeIcon icon={faCommentDots} />
