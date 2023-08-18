@@ -17,24 +17,28 @@ export const Title = styled.div`
 
 /* TalkList */
 export const LocationList = styled.div`
-  background-color: #fff;
+  background-color: #eef4fa;
   border-radius: 10px;
-  width: 100%;
+  width: 50%;
   height: 100%;
 
   ul {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
     list-style: none;
     width: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
   }
 
   li {
-    width: 120px;
-    height: 35px;
-    line-height: 35px;
+    width: 110px;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
-    font-size: 21px;
+    font-size: 17px;
     margin: 15px 0;
   }
 
