@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LocationList, Title, Wrap } from './LiveTalkElements';
 import './LiveTalk.css';
-import Navbar from '../../components/Nav/Nav';
-import Footer from '../../components/Footer/Footer';
 
 function LiveTalkList() {
   const token = localStorage.getItem('token');
@@ -54,8 +52,7 @@ function LiveTalkList() {
   };
 
   return (
-    <div className="body">
-      <Navbar />
+    <div>
       <Wrap>
         <Title>
           <h5>Contents</h5>
@@ -73,10 +70,12 @@ function LiveTalkList() {
                 </a>
               </li>
             ))}
+            <li />
+            <li />
+            <li />
           </ul>
         </LocationList>
       </Wrap>
-      <Footer />
     </div>
   );
 }
