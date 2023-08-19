@@ -2,7 +2,6 @@ import SeoulWeather from './SeoulWeather.js';
 import Navbar from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 import {
-  Wrapper,
   WeatherImg,
   Container,
   Container0,

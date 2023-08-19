@@ -10,7 +10,7 @@ import Community from './pages/CommunityPage/CommunityPage';
 import Coordi from './pages/CoordiPage/CoordiPage';
 import UploadCoordi from './pages/UploadCoordiPage/UploadCoordiPage';
 import CoordiDetail from './pages/CoordiDetailPage/CoordiDetailPage';
-import LiveTalkList from './pages/LiveTalkPage/LiveTalkList';
+import LiveTalkList from './pages/LiveTalkPage/LiveTalkListPage';
 import LiveTalkRoom from './pages/LiveTalkPage/LiveTalkRoom';
 import KakaoAuthHandle from './components/Modal/KakaoAuthHandle';
 
@@ -36,7 +36,6 @@ const Router = () => {
           path="/community/livetalk/talkroom/:location"
           element={<LiveTalkRoom />}
         />
-
         <Route
           path="/api/login/oauth2/code/kakao"
           element={<KakaoAuthHandle />}

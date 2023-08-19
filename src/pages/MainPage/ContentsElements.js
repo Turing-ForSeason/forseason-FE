@@ -41,6 +41,7 @@ export const Content1 = styled.div`
 
   h5 {
     color: gray;
+    font-size: 16px;
   }
 `;
 
@@ -60,6 +61,7 @@ export const Content2 = styled.div`
 
   h5 {
     color: gray;
+    font-size: 16px;
   }
 
   @media (max-width: 1240px) {
