@@ -13,6 +13,7 @@ import CoordiDetail from './pages/CoordiDetailPage/CoordiDetailPage';
 import TestLogin from './pages/TestPage/TestLogin';
 import LiveTalkList from './pages/LiveTalkPage/LiveTalkList';
 import LiveTalkRoom from './pages/LiveTalkPage/LiveTalkRoom';
+import KakaoAuthHandle from './components/Modal/KakaoAuthHandle';
 
 const Router = () => {
   return (
@@ -36,6 +37,11 @@ const Router = () => {
         <Route
           path="/community/livetalk/talkroom/:location"
           element={<LiveTalkRoom />}
+        />
+        <Route
+          exact
+          path="/api/login/oauth2/code/kakao"
+          element={<KakaoAuthHandle />}
         />
       </Routes>
     </BrowserRouter>
