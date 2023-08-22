@@ -7,14 +7,20 @@ import naver from './naver.png';
 import './SignUpModal.css';
 import { faRocket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 const CLIENT_ID = '262778662e9437ec42d6cc9d231e88bc';
 const REDIRECT_URI = `http://${window.location.host}/api/login/oauth2/code/kakao`;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-const kakaoLogin = () => {
-  window.location.href = KAKAO_AUTH_URL;
-};
 
 const SignUpModal = ({ show, onHide }) => {
+  let navigate = useNavigate();
+  const onClickBackHome = () => {
+    navigate('/');
+    window.scrollTo(0, 0);
+  };
+  const kakaoLogin = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
   return (
     <Modal
       show={show}

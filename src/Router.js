@@ -37,6 +37,7 @@ const Router = () => {
           element={<LiveTalkRoom />}
         />
         <Route
+          exact
           path="/api/login/oauth2/code/kakao"
           element={<KakaoAuthHandle />}
         />
