@@ -1,14 +1,23 @@
 import styled from 'styled-components';
 
 /* 공통 */
+export const Body = styled.div`
+  background-color: #f2f2f2;
+`;
+
 export const Wrap = styled.div`
   margin: 0 auto;
   width: 950px;
   height: 100%;
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 export const Title = styled.div`
-  margin: 30px 0;
+  margin-top: 10px;
   h5 {
     color: grey;
     font-size: 16px;
@@ -17,24 +26,28 @@ export const Title = styled.div`
 
 /* TalkList */
 export const LocationList = styled.div`
-  background-color: #fff;
+  background-color: #eef4fa;
   border-radius: 10px;
-  width: 100%;
+  width: 50%;
   height: 100%;
 
   ul {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
     list-style: none;
     width: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
   }
 
   li {
-    width: 120px;
-    height: 35px;
-    line-height: 35px;
+    width: 110px;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
-    font-size: 21px;
+    font-size: 17px;
     margin: 15px 0;
   }
 
@@ -57,6 +70,11 @@ export const MessageWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+
+  @media (max-width: 950px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 export const InfoWrap = styled.div`
@@ -82,6 +100,14 @@ export const Location = styled.div`
   svg {
     padding: 0 4px;
   }
+  a {
+    text-decoration: none;
+    color: black !important;
+  }
+
+  a:hover {
+    color: lightgrey !important;
+  }
 `;
 
 export const UserCount = styled.div`
@@ -92,4 +118,9 @@ export const UserCount = styled.div`
   svg {
     padding: 0 5px;
   }
+`;
+
+export const ContentDate = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

@@ -8,7 +8,6 @@ import {
   Wrapper1,
   Wrapper2,
   WeatherDiv,
-  Wrapper,
   Wrapper22,
   WeatherImg,
   Container,

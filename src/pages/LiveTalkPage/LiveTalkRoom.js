@@ -11,6 +11,8 @@ import {
   InfoWrap,
   Location,
   UserCount,
+  ContentDate,
+  Body,
 } from './LiveTalkElements';
 import './LiveTalk.css';
 import Navbar from '../../components/Nav/Nav';
@@ -35,7 +37,7 @@ function LiveTalkRoom(props) {
   const userProfilePicture = useRef('');
 
   const page = useRef(0);
-  // const prevMessage = useRef(null);
+  const token = localStorage.getItem('token');
 
   const searchLocation = useLocation();
   const locationPathname = searchLocation.pathname;
@@ -45,6 +47,9 @@ function LiveTalkRoom(props) {
     // userCount를 갱신해주는 함수
     axios
       .get('http://localhost:8080/talk/room/userCount', {
+        headers: {
+          Authorization: `${token}`,
+        },
         params: {
           location: roomLocation.current,
         },
@@ -53,7 +58,8 @@ function LiveTalkRoom(props) {
         setUserCount(response.data.result.userCount);
       })
       .catch(error => {
-        console.error('Fail to update userCount', error);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 
@@ -61,8 +67,12 @@ function LiveTalkRoom(props) {
     // page를 이용하여 이전 채팅 기록들을 DB로부터 가져오는 함수
     axios
       .get('http://localhost:8080/talk/talks', {
+        headers: {
+          Authorization: `${token}`,
+        },
         params: {
           page: page.current,
+          size: 100,
           location: roomLocation.current,
           userUUID: userUUID.current,
         },
@@ -74,7 +84,8 @@ function LiveTalkRoom(props) {
         page.current += 1;
       })
       .catch(error => {
-        console.error('Failed to get talk records: ', error);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 
@@ -83,6 +94,9 @@ function LiveTalkRoom(props) {
     // 사용자의 닉네임과 프사를 DB로부터 불러와서 변수에 저장해줌
     axios
       .get('http://localhost:8080/talk/user/init', {
+        headers: {
+          Authorization: `${token}`,
+        },
         params: {
           location: roomLocation.current,
           userUUID: userUUID.current,
@@ -93,7 +107,8 @@ function LiveTalkRoom(props) {
         userProfilePicture.current = response.data.result.userProfilePicture;
       })
       .catch(error => {
-        console.error('Failed to initialize user: ', error);
+        alert(error.response.data.message);
+        window.location.href = '/';
       });
   };
 
@@ -114,7 +129,7 @@ function LiveTalkRoom(props) {
 
       stompClient.current.send(
         '/pub/talk/sendMessage',
-        {},
+        { Authorization: `${token}` },
         JSON.stringify(chatMessage),
       );
       setMessageContent('');
@@ -133,21 +148,18 @@ function LiveTalkRoom(props) {
   const onError = payload => {
     // 에러메세지 받았을때
     if (payload !== null) {
-      //   const errorResponse = JSON.parse(payload.body);
-      console.log(payload);
-      console.log(payload.body.code);
-      console.log(payload.body.message);
+      const errorResponse = JSON.parse(payload.body);
+      console.log('연결 실패!');
+      alert(errorResponse.message);
     }
-
     // Handle errors and cleanup
     axios
       .post('http://localhost:8080/talk/user/delete', {
         location: roomLocation.current,
         userUUID: userUUID.current,
       })
-      .catch(error => {
-        console.error('Failed to delete user: ', error);
-      });
+      .catch(error => {});
+    window.location.href = '/';
   };
 
   const onConnect = () => {
@@ -155,12 +167,13 @@ function LiveTalkRoom(props) {
     stompClient.current.subscribe(
       `/sub/talk/room/${roomLocation.current}`,
       onMessageReceived,
+      { Authorization: `${token}` },
     );
 
     // 입장 메세지 날리기
     stompClient.current.send(
       '/pub/talk/enter',
-      {},
+      { Authorization: `${token}` },
       JSON.stringify({
         type: 'ENTER',
         location: roomLocation.current,
@@ -173,11 +186,9 @@ function LiveTalkRoom(props) {
     );
 
     // Initialize user
-    console.log('initUser' + roomLocation.current);
     initUser();
 
     // Load previous messages
-    console.log('getTalkRecords' + userUUID.current);
     getTalkRecords();
   };
 
@@ -191,6 +202,7 @@ function LiveTalkRoom(props) {
     roomLocation.current = decodeURIComponent(
       locationPathname.split('/').pop(),
     );
+    console.log(roomLocation.current);
 
     // stompClient 초기화 (소켓)
     let socket = new SockJS('http://localhost:8080/stomp/talk');
@@ -199,14 +211,18 @@ function LiveTalkRoom(props) {
     if (stompClient.current !== null) {
       // 연결
       console.log('stompClient 설정 됨');
-      stompClient.current.connect({}, onConnect, onError);
+      stompClient.current.connect(
+        { Authorization: `${token}` },
+        onConnect,
+        onError,
+      );
     }
 
     return () => {
       if (stompClient.current) {
         stompClient.current.send(
           '/pub/talk/leave',
-          {},
+          { Authorization: `${token}` },
           JSON.stringify({
             type: 'LEAVE',
             location: roomLocation.current,
@@ -234,6 +250,23 @@ function LiveTalkRoom(props) {
     let message;
     if (props.chat.type === 'TALK') {
       if (
+        props.chat.userUUID !== null ||
+        props.chat.userUUID === userUUID.current
+      ) {
+        message = <MyMessage chat={props.chat} />;
+      } else {
+        message = <OtherMessage chat={props.chat} />;
+      }
+    } else if (props.chat.type === 'MINE') {
+      message = <MyMessage chat={props.chat} />;
+    }
+    return <div>{message}</div>;
+  };
+
+  const MyMessage = props => {
+    let message;
+    if (props.chat.type === 'TALK') {
+      if (
         props.chat.userUUID === null ||
         props.chat.userUUID === userUUID.current
       ) {
@@ -242,27 +275,9 @@ function LiveTalkRoom(props) {
         message = <OtherMessage chat={props.chat} />;
       }
     } else if (props.chat.type === 'MINE') {
-      message = <OtherMessage chat={props.chat} />;
+      message = <MyMessage chat={props.chat} />;
     }
     return <div>{message}</div>;
-  };
-
-  const MyMessage = props => {
-    return (
-      <span className="myMessage">
-        <li>
-          <div>
-            <img
-              src={props.chat.userProfilePicture}
-              className="userProfilePictureElement"
-            />
-            <div className="userNameElement">{props.chat.userNickname}</div>
-          </div>
-          <div className="contentElement">{props.chat.content}</div>
-          <DateParse date={props.chat.date} />
-        </li>
-      </span>
-    );
   };
 
   const OtherMessage = props => {
@@ -276,8 +291,10 @@ function LiveTalkRoom(props) {
             />
             <div className="userNameElement">{props.chat.userNickname}</div>
           </div>
-          <div className="contentElement">{props.chat.content}</div>
-          <DateParse date={props.chat.date} />
+          <ContentDate>
+            <div className="contentElement">{props.chat.content}</div>
+            <DateParse date={props.chat.date} />
+          </ContentDate>
         </li>
       </span>
     );
@@ -320,7 +337,13 @@ function LiveTalkRoom(props) {
       String(currentDate.getDate()) +
       '일';
 
-    return <div className="dateBarElement"> {currentStringDate} </div>;
+    return (
+      <div className="dateBarElement">
+        {' '}
+        <FontAwesomeIcon icon={faCalendarDays} />
+        {currentStringDate}{' '}
+      </div>
+    );
   };
 
   const RoomHead = props => {
@@ -329,7 +352,9 @@ function LiveTalkRoom(props) {
       <Info>
         <Location>
           <FontAwesomeIcon icon={faLocationCrosshairs} />
-          <h5> {roomLocationCurrent}</h5>
+          <a href="/community/livetalk/talklist">
+            <h5> {roomLocationCurrent}</h5>
+          </a>
         </Location>
         <UserCount>
           <FontAwesomeIcon icon={faCommentDots} />
@@ -346,7 +371,7 @@ function LiveTalkRoom(props) {
   }, [messages]);
 
   return (
-    <div className="body">
+    <Body>
       <Navbar />
       <Wrap>
         <Title>
@@ -394,7 +419,7 @@ function LiveTalkRoom(props) {
         </MessageWrap>
       </Wrap>
       <Footer />
-    </div>
+    </Body>
   );
 }
 

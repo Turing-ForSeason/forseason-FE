@@ -10,8 +10,7 @@ import Community from './pages/CommunityPage/CommunityPage';
 import Coordi from './pages/CoordiPage/CoordiPage';
 import UploadCoordi from './pages/UploadCoordiPage/UploadCoordiPage';
 import CoordiDetail from './pages/CoordiDetailPage/CoordiDetailPage';
-import TestLogin from './pages/TestPage/TestLogin';
-import LiveTalkList from './pages/LiveTalkPage/LiveTalkList';
+import LiveTalkList from './pages/LiveTalkPage/LiveTalkListPage';
 import LiveTalkRoom from './pages/LiveTalkPage/LiveTalkRoom';
 import KakaoAuthHandle from './components/Modal/KakaoAuthHandle';
 
@@ -20,7 +19,6 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/community/livetalk" element={<TestLogin />} />
         <Route path="/mypage" element={<UserInfo />} />
         <Route path="/mypage/editprofile" element={<EditProfile />} />
         <Route path="/mypage/myboard" element={<MyBoard />} />
