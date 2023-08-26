@@ -62,22 +62,22 @@ function LiveTalkList() {
           <h5>포시즌 유저와 지역별 실시간 날씨 상황을 공유해보세요.</h5>
         </Title>
         <Half>
-        <LocationList>
-          <ul>
-            {roomList.map(room => (
-              <li key={room.id}>
-                {/* <Link to={`/community/livetalk/talkroom/${encodeURIComponent(room.location)}`} onClick={() => onClickEnter(room.location)}>{room.location}</Link> */}
-                <a href="#" onClick={() => onClickEnter(room.location)}>
-                  {room.location}
-                </a>
-              </li>
-            ))}
-            <li />
-            <li />
-            <li />
-          </ul>
-        </LocationList>
-        <LocationList>
+          <LocationList>
+            <ul>
+              {roomList.map(room => (
+                <li key={room.id}>
+                  {/* <Link to={`/community/livetalk/talkroom/${encodeURIComponent(room.location)}`} onClick={() => onClickEnter(room.location)}>{room.location}</Link> */}
+                  <a href="#" onClick={() => onClickEnter(room.location)}>
+                    {room.location}
+                  </a>
+                </li>
+              ))}
+              <li />
+              <li />
+              <li />
+            </ul>
+          </LocationList>
+          <LocationList>
             <TalkPreview />
           </LocationList>
         </Half>
