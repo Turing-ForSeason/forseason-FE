@@ -61,6 +61,10 @@ export const LocationList = styled.div`
   }
 `;
 
+export const Half = styled.div`
+  display: flex;
+`;
+
 /* TalkRoom */
 export const MessageWrap = styled.div`
   width: 900px;
