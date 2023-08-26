@@ -11,8 +11,8 @@ import {
   InfoWrap,
   Location,
   UserCount,
-  ContentDate,
   Body,
+  ContentDate,
 } from './LiveTalkElements';
 import './LiveTalk.css';
 import Navbar from '../../components/Nav/Nav';
@@ -264,20 +264,23 @@ function LiveTalkRoom(props) {
   };
 
   const MyMessage = props => {
-    let message;
-    if (props.chat.type === 'TALK') {
-      if (
-        props.chat.userUUID === null ||
-        props.chat.userUUID === userUUID.current
-      ) {
-        message = <MyMessage chat={props.chat} />;
-      } else {
-        message = <OtherMessage chat={props.chat} />;
-      }
-    } else if (props.chat.type === 'MINE') {
-      message = <MyMessage chat={props.chat} />;
-    }
-    return <div>{message}</div>;
+    return (
+      <span className="myMessage">
+        <li>
+          <img
+            src={props.chat.userProfilePicture}
+            className="userProfilePictureElement"
+          />
+          <div className="nameContent">
+            <div className="userNameElement">{props.chat.userNickname}</div>
+            <ContentDate>
+              <DateParse date={props.chat.date} />
+              <div className="contentElement">{props.chat.content}</div>
+            </ContentDate>
+          </div>
+        </li>
+      </span>
+    );
   };
 
   const OtherMessage = props => {
@@ -291,10 +294,8 @@ function LiveTalkRoom(props) {
             />
             <div className="userNameElement">{props.chat.userNickname}</div>
           </div>
-          <ContentDate>
-            <div className="contentElement">{props.chat.content}</div>
-            <DateParse date={props.chat.date} />
-          </ContentDate>
+          <div className="contentElement">{props.chat.content}</div>
+          <DateParse date={props.chat.date} />
         </li>
       </span>
     );
@@ -337,13 +338,7 @@ function LiveTalkRoom(props) {
       String(currentDate.getDate()) +
       '일';
 
-    return (
-      <div className="dateBarElement">
-        {' '}
-        <FontAwesomeIcon icon={faCalendarDays} />
-        {currentStringDate}{' '}
-      </div>
-    );
+    return <div className="dateBarElement"> {currentStringDate} </div>;
   };
 
   const RoomHead = props => {
