@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { LocationList, Title, Wrap } from './LiveTalkElements';
+import { LocationList, Title, Wrap, Half } from './LiveTalkElements';
 import './LiveTalk.css';
+import TalkPreview from '../CommunityPage/TalkPreview';
 
 function LiveTalkList() {
   const token = localStorage.getItem('token');
@@ -60,6 +61,7 @@ function LiveTalkList() {
           <h4>실시간 날씨 TALK</h4>
           <h5>포시즌 유저와 지역별 실시간 날씨 상황을 공유해보세요.</h5>
         </Title>
+        <Half>
         <LocationList>
           <ul>
             {roomList.map(room => (
@@ -75,6 +77,10 @@ function LiveTalkList() {
             <li />
           </ul>
         </LocationList>
+        <LocationList>
+            <TalkPreview />
+          </LocationList>
+        </Half>
       </Wrap>
     </div>
   );
