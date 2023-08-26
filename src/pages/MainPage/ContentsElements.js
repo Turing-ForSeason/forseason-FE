@@ -125,3 +125,7 @@ export const User = styled.div`
   margin: 20px 0 10px 20px;
   font-size: 15px;
 `;
+
+export const Cont = styled.div`
+  width: 50%;
+`;
