@@ -5,25 +5,28 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function TalkPreview() {
-  const [talk, setTalk] = useState([]);
+  const [talk, setTalk] = useState({});
 
   const token = localStorage.getItem('Authorization');
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080//talk/talklist?size=4', {
+      .get('http://localhost:8080/talk/talklist?size=4', {
         headers: {
           Authorization: `${token}`,
         },
       })
       .then(res => {
-        const talk = res.data;
+        const talkData = res.data.result.getContent[0];
         setTalk({
-          id: talk.result.getContent[0].talkId,
-          user: talk.result.getContent[0].userNickname,
-          contents: talk.result.getContent[0].Contents,
-          location: talk.result.getContent[0].location,
+          id: talkData.talkId,
+          user: talkData.userNickname,
+          contents: talkData.Contents,
+          location: talkData.location,
         });
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
       });
   }, []);
 

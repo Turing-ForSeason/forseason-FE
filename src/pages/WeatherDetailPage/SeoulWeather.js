@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Footer from '../../components/Footer/Footer.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,23 +26,32 @@ function Weather() {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=d0a6715be544311062d89f45ccb86908`;
 
   // 날씨 가져오기
-  axios.get(url).then(responseData => {
-    const data = responseData.data;
-    setWeather({
-      id: data.weather[0].id,
-      main: data.weather[0].main,
-      temperature: data.main.temp,
-      temp_max: data.main.temp_max,
-      temp_min: data.main.temp_min,
-      feels_like: data.main.feels_like,
-      humidity: data.main.humidity,
-      wind: data.wind.speed,
-      clouds: data.clouds.all,
-      sunrise: data.sys.sunrise,
-      sunset: data.sys.sunset,
-      loading: false,
-    });
-  });
+  useEffect(() => {
+    axios
+      .get(url)
+      .then(responseData => {
+        const data = responseData.data;
+        setWeather({
+          id: data.weather[0].id,
+          main: data.weather[0].main,
+          temperature: data.main.temp,
+          temp_max: data.main.temp_max,
+          temp_min: data.main.temp_min,
+          feels_like: data.main.feels_like,
+          humidity: data.main.humidity,
+          wind: data.wind.speed,
+          clouds: data.clouds.all,
+          sunrise: data.sys.sunrise,
+          sunset: data.sys.sunset,
+          loading: false,
+        });
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 429) {
+          console.error('많은 요청으로 오류가 발생합니다. 잠시 기다려주세요.');
+        }
+      });
+  }, [url]);
 
   const weatherValue = {
     Clear: '맑음',
