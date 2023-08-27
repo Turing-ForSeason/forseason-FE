@@ -41,6 +41,7 @@ function WeatherDetail() {
   const [location, setLocation] = useState('');
   const [result, setResult] = useState({});
   const [week, setWeek] = useState({});
+  const [isError, setIsError] = useState(false);
 
   const searchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`;
   const weekUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${API_KEY}`;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SetBackground from './SetBackground';
 import Time from './Time';
@@ -26,17 +26,26 @@ const Banner = () => {
   };
 
   // 날씨 가져오기
-  axios.get(url).then(responseData => {
-    const data = responseData.data;
-    setWeather({
-      id: data.weather[0].id,
-      main: data.weather[0].main,
-      temperature: data.main.temp,
-      temp_max: data.main.temp_max,
-      temp_min: data.main.temp_min,
-      loading: false,
-    });
-  });
+  useEffect(() => {
+    axios
+      .get(url)
+      .then(responseData => {
+        const data = responseData.data;
+        setWeather({
+          id: data.weather[0].id,
+          main: data.weather[0].main,
+          temperature: data.main.temp,
+          temp_max: data.main.temp_max,
+          temp_min: data.main.temp_min,
+          loading: false,
+        });
+      })
+      .catch(error => {
+        if (error.response && error.response.status === 429) {
+          console.error('많은 요청으로 오류가 발생합니다. 잠시 기다려주세요.');
+        }
+      });
+  }, [url]);
 
   const hashtag = () => {
     let temp = (weather.temperature - 273.15).toFixed(1);
