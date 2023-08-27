@@ -37,7 +37,7 @@ function LiveTalkRoom(props) {
   const userProfilePicture = useRef('');
 
   const page = useRef(0);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('Authorization');
 
   const searchLocation = useLocation();
   const locationPathname = searchLocation.pathname;
