@@ -6,7 +6,7 @@ import './LiveTalk.css';
 import TalkPreview from '../CommunityPage/TalkPreview';
 
 function LiveTalkList() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('Authorization');
 
   const [roomList, setRoomList] = useState([]);
   const navigate = useNavigate();
