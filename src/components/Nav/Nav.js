@@ -30,27 +30,27 @@ const Navbar = () => {
 
   return (
     <Nav>
-      <NavLogo to="/" activeStyle>
+      <NavLogo to="/" activestyle="true">
         FOR SEASON
       </NavLogo>
       <Bars />
       <NavMenu>
-        <NavLink to="/weather" activeStyle>
+        <NavLink to="/weather" activestyle="true">
           날씨
         </NavLink>
-        <NavLink to="/community/coordi" activeStyle>
+        <NavLink to="/community/coordi" activestyle="true">
           코디 모아보기
         </NavLink>
-        <NavLink to="/community/coordi/detail/:boardId" activeStyle>
+        <NavLink to="/community/coordi/detail/:boardId" activestyle="true">
           코디 자세히 보기
         </NavLink>
-        <NavLink to="/community/coordi/upload" activeStyle>
+        <NavLink to="/community/coordi/upload" activestyle="true">
           코디 업로드
         </NavLink>
-        <NavLink to="/community/livetalk/talklist" activeStyle>
+        <NavLink to="/community/livetalk/talklist" activestyle="true">
           Live Talk
         </NavLink>
-        <NavLink to="/mypage" activeStyle>
+        <NavLink to="/mypage" activestyle="true">
           마이페이지
         </NavLink>
       </NavMenu>
