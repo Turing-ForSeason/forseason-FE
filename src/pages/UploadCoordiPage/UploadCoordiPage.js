@@ -51,14 +51,18 @@ class UploadCoordi extends Component {
 
   /* 게시글 제목 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   handleTitleChange = event => {
-    this.setTitle(event.target.value);
+    this.setState({
+      title: event.target.value,
+    });
   };
 
   /* 게시글 내용 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   // CKEditor 사용
   handleContentChange = (event, editor) => {
     const data = editor.getData();
-    this.setContent(data);
+    this.setState({
+      content: data,
+    });
   };
 
   /* 게시글 해시태그 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
@@ -103,7 +107,9 @@ class UploadCoordi extends Component {
 
   /* 게시글 장소 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   handleLocationChange = event => {
-    this.setSelectedLocation(event.target.value);
+    this.setState({
+      selectedLocation: event.target.value,
+    });
   };
 
   /* 게시글 업로드 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
