@@ -20,7 +20,7 @@ function BestCoordi() {
 
   const [coordi, setCoordi] = useState([]);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('Authorization');
 
   useEffect(() => {
     axios

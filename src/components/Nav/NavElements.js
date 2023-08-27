@@ -79,31 +79,20 @@ export const NavBtn = styled.nav`
 `;
 
 export const Button = styled.button`
-width: 100%
-height: 100%;
-border: 0;
-background-color: #fff;
-&:hover {
-  transition: all 0.2s ease-in-out;
-  color: #38a0ff;
-}
-`;
-
-export const NavBtnLink = styled(Link)`
+  height: 80%;
   border-radius: 20px;
   background: #f2f2f2;
-  padding: 0.1rem 0.5rem;
+  padding: 0.1rem 0.7rem;
   margin-left: 10px;
-  color: #4e4e4e;
   border: none;
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-
   &:hover {
     transition: all 0.2s ease-in-out;
-    color: #ffffff;
-    background: #52a1de;
+    background: #f2f2f2;
+    color: #38a0ff;
+    font-weight: bold;
   }
 `;
