@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Nav,
   NavLogo,
@@ -13,11 +14,15 @@ import SignUpModal from '../Modal/SignUpModal';
 const Navbar = () => {
   const [SignUpModalOn, setSignUpModalOn] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // 로그아웃 로직 수행 후 로컬 스토리지의 토큰 제거 및 로그인 상태 설정
     localStorage.removeItem('Authorization');
     setIsLoggedIn(false);
+
+    // 로그아웃 후 메인 페이지로 이동
+    navigate('/');
   };
 
   useEffect(() => {
@@ -41,8 +46,8 @@ const Navbar = () => {
         <NavLink to="/community/coordi" activestyle="true">
           코디 모아보기
         </NavLink>
-        <NavLink to="/community/coordi/detail/:boardId" activestyle="true">
-          코디 자세히 보기
+        <NavLink to="/community" activestyle="true">
+          커뮤니티
         </NavLink>
         <NavLink to="/community/coordi/upload" activestyle="true">
           코디 업로드
