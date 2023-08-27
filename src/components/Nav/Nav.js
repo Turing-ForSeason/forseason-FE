@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import {
   Nav,
   NavLogo,
@@ -6,13 +6,27 @@ import {
   Bars,
   NavMenu,
   NavBtn,
-  NavBtnLink,
   Button,
 } from './NavElements';
 import SignUpModal from '../Modal/SignUpModal';
 
 const Navbar = () => {
   const [SignUpModalOn, setSignUpModalOn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogout = () => {
+    // 로그아웃 로직 수행 후 로컬 스토리지의 토큰 제거 및 로그인 상태 설정
+    localStorage.removeItem('Authorization');
+    setIsLoggedIn(false);
+  };
+
+  useEffect(() => {
+    // 페이지 로드 시 로컬 스토리지에서 토큰을 가져와 로그인 상태를 설정
+    const token = localStorage.getItem('Authorization');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   return (
     <Nav>
@@ -41,11 +55,16 @@ const Navbar = () => {
         </NavLink>
       </NavMenu>
       <NavBtn>
-        <NavBtnLink>
+        {isLoggedIn ? (
+          <Button variant="secondary" onClick={() => handleLogout()}>
+            로그아웃
+          </Button>
+        ) : (
           <Button variant="secondary" onClick={() => setSignUpModalOn(true)}>
             로그인
           </Button>
-        </NavBtnLink>
+        )}
+
         <SignUpModal
           show={SignUpModalOn}
           onHide={() => setSignUpModalOn(false)}

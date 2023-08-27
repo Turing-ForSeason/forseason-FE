@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function TalkPreview() {
   const [talk, setTalk] = useState([]);
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('Authorization');
 
   useEffect(() => {
     axios
