@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
   Nav,
@@ -10,6 +11,9 @@ import {
   Button,
 } from './NavElements';
 import SignUpModal from '../Modal/SignUpModal';
+const CLIENT_ID = '262778662e9437ec42d6cc9d231e88bc';
+const REDIRECT_URI = `http://${window.location.host}/logout/service`;
+const LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=${REDIRECT_URI}`;
 
 const Navbar = () => {
   const [SignUpModalOn, setSignUpModalOn] = useState(false);
@@ -18,11 +22,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     // 로그아웃 로직 수행 후 로컬 스토리지의 토큰 제거 및 로그인 상태 설정
-    localStorage.removeItem('Authorization');
-    setIsLoggedIn(false);
-
-    // 로그아웃 후 메인 페이지로 이동
-    navigate('/');
+    window.location.href = LOGOUT_URL;
   };
 
   useEffect(() => {
@@ -30,6 +30,8 @@ const Navbar = () => {
     const token = localStorage.getItem('Authorization');
     if (token) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
   }, []);
 
@@ -80,3 +82,29 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+export const ServiceLogout = () => {
+  const token = localStorage.getItem('Authorization');
+  console.log(token);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/logout/service', {
+        headers: {
+          Authorization: `${token}`,
+        },
+      })
+      .then()
+      .catch(error => {
+        alert(error.response.data.message);
+      });
+
+    localStorage.removeItem('Authorization');
+
+    // 로그아웃 후 메인 페이지로 이동
+    navigate('/');
+  });
+
+  return <div>로그아웃 중입니다. 잠시만 기다려주세요.</div>;
+};

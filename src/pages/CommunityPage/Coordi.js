@@ -33,7 +33,7 @@ function Coordi() {
         },
       )
       .then(res => {
-        const coordiData = res.data.result.getContent.map(coordi => ({
+        const coordiData = res.data.result.content.map(coordi => ({
           id: coordi.boardId,
           img: coordi.boardPicture,
           user: coordi.boardUserNickname,
