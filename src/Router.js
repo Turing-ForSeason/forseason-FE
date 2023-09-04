@@ -13,6 +13,7 @@ import CoordiDetail from './pages/CoordiDetailPage/CoordiDetailPage';
 import LiveTalkList from './pages/LiveTalkPage/LiveTalkListPage';
 import LiveTalkRoom from './pages/LiveTalkPage/LiveTalkRoom';
 import KakaoAuthHandle from './components/Modal/KakaoAuthHandle';
+import { ServiceLogout } from './components/Nav/Nav';
 
 const Router = () => {
   return (
@@ -41,6 +42,7 @@ const Router = () => {
           path="/api/login/oauth2/code/kakao"
           element={<KakaoAuthHandle />}
         />
+        <Route path="/logout/service" element={<ServiceLogout />} />
       </Routes>
     </BrowserRouter>
   );

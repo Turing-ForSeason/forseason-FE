@@ -17,7 +17,7 @@ function TalkPreview() {
         },
       })
       .then(res => {
-        const talkData = res.data.result.getContent[0];
+        const talkData = res.data.result[0];
         setTalk({
           id: talkData.talkId,
           user: talkData.userNickname,
