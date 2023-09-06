@@ -127,5 +127,22 @@ export const User = styled.div`
 `;
 
 export const Cont = styled.div`
-  width: 50%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h4 {
+    margin: 0 20px 0 0;
+    font-size: 18px;
+  }
+
+  h5 {
+    margin: 0;
+    font-size: 15px;
+  }
+`;
+
+export const Name = styled.div`
+  display: flex;
+  align-items: center;
 `;

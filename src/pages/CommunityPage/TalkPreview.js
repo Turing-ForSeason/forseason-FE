@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Cont } from '../MainPage/ContentsElements';
+import { Cont, Name } from '../MainPage/ContentsElements';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function TalkPreview() {
-  const [talk, setTalk] = useState({});
+  const [talks, setTalks] = useState([]);
 
   const token = localStorage.getItem('Authorization');
 
@@ -17,13 +17,15 @@ function TalkPreview() {
         },
       })
       .then(res => {
-        const talkData = res.data.result[0];
-        setTalk({
-          id: talkData.talkId,
-          user: talkData.userNickname,
-          contents: talkData.Contents,
-          location: talkData.location,
-        });
+        const talkData = res.data.result;
+        setTalks(
+          talkData.map(talkData => ({
+            id: talkData.talkId,
+            user: talkData.userNickname,
+            contents: talkData.contents,
+            location: talkData.location,
+          })),
+        );
       })
       .catch(error => {
         console.error('Error fetching data: ', error);
@@ -31,12 +33,18 @@ function TalkPreview() {
   }, []);
 
   return (
-    <Cont>
-      <FontAwesomeIcon icon={faUser} />
-      <h4>{talk.user}</h4>
-      <h4>{talk.contents}</h4>
-      <h4>{talk.location}</h4>
-    </Cont>
+    <>
+      {talks.map((talk, index) => (
+        <Cont key={index}>
+          <Name>
+            <FontAwesomeIcon icon={faUser} />
+            <h4>{talk.user}</h4>
+          </Name>
+          <h4>{talk.contents}</h4>
+          <h5>{talk.location}</h5>
+        </Cont>
+      ))}
+    </>
   );
 }
 

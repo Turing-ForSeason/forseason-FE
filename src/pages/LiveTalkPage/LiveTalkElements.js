@@ -28,8 +28,9 @@ export const Title = styled.div`
 export const LocationList = styled.div`
   background-color: #eef4fa;
   border-radius: 10px;
-  width: 50%;
+  width: 49%;
   height: 100%;
+  padding: 10px;
 
   ul {
     display: flex;
@@ -63,6 +64,7 @@ export const LocationList = styled.div`
 
 export const Half = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 /* TalkRoom */
