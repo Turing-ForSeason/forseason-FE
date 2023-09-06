@@ -33,14 +33,16 @@ function Coordi() {
         },
       )
       .then(res => {
-        const coordiData = res.data.result.content.map(coordi => ({
-          id: coordi.boardId,
-          img: coordi.boardPicture,
-          user: coordi.boardUserNickname,
-          like: coordi.boardLikeNum,
-          hashtag: coordi.boardHashtags,
-        }));
-        setCoordiList(coordiData);
+        const coordiData = res.data.result.content;
+        setCoordiList(
+          coordiData.map(coordiData => ({
+            id: coordiData.boardId,
+            img: coordiData.boardPicture,
+            user: coordiData.boardUserNickname,
+            like: coordiData.boardLikeNum,
+            hashtag: coordiData.boardHashtags,
+          })),
+        );
       })
       .catch(error => {
         console.error('Error fetching data: ', error);
@@ -50,8 +52,8 @@ function Coordi() {
   return (
     <ContentsContainer>
       {coordiList.length > 0 ? (
-        coordiList.map(coordi => (
-          <Content1 key={coordi.id}>
+        coordiList.map((coordi, index) => (
+          <Content1 key={index}>
             <h5>Contents</h5>
             <h4>포시즌</h4>
             <h4>실시간 코디 스타일</h4>
