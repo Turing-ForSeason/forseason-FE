@@ -22,7 +22,7 @@
   border-radius: 10px;
 }
 
-.messageArea img {
+.myMessage img {
   border-radius: 50%;
   width: 38px;
   opacity: 0.9;
@@ -82,7 +82,7 @@
 .dateElement {
   font-size: 11px;
   color: grey;
-  margin: 9px 5px 0 0;
+  margin: 9px 5px 0 5px;
 }
 
 .otherMessage {
@@ -92,6 +92,16 @@
   list-style: none;
   margin-left: 15px;
   margin-bottom: 25px;
+  position: relative;
+}
+
+.otherMessage img {
+  border-radius: 50%;
+  width: 38px;
+  opacity: 0.9;
+  position: absolute;
+  left: 0;
+  top: 2px;
 }
 
 .otherMessage li div {
@@ -119,7 +129,7 @@
 .nameContent {
   display: flex;
   flex-direction: column;
-  margin-right: 50px;
+  margin: 0 50px;
 }
 
 .userNameElement {

@@ -287,15 +287,17 @@ function LiveTalkRoom(props) {
     return (
       <span className="otherMessage">
         <li>
-          <div>
-            <img
-              src={props.chat.userProfilePicture}
-              className="userProfilePictureElement"
-            />
+          <img
+            src={props.chat.userProfilePicture}
+            className="userProfilePictureElement"
+          />
+          <div className="nameContent">
             <div className="userNameElement">{props.chat.userNickname}</div>
+            <ContentDate>
+              <div className="contentElement">{props.chat.content}</div>
+              <DateParse date={props.chat.date} />
+            </ContentDate>
           </div>
-          <div className="contentElement">{props.chat.content}</div>
-          <DateParse date={props.chat.date} />
         </li>
       </span>
     );
@@ -338,7 +340,12 @@ function LiveTalkRoom(props) {
       String(currentDate.getDate()) +
       '일';
 
-    return <div className="dateBarElement"> {currentStringDate} </div>;
+    return (
+      <div className="dateBarElement">
+        <FontAwesomeIcon icon={faCalendarDays} />
+        {currentStringDate}
+      </div>
+    );
   };
 
   const RoomHead = props => {
