@@ -131,14 +131,13 @@ export const Cont = styled.div`
   align-items: center;
   margin-bottom: 20px;
 
-  h4 {
-    margin: 0 20px 0 0;
-    font-size: 18px;
-  }
-
   h5 {
-    margin: 0;
+    margin: 0 10px 0 10px;
     font-size: 15px;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

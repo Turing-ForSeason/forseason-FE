@@ -38,7 +38,7 @@ function TalkPreview() {
     const now = new Date();
     const secondsPast = (now - talkDate) / 1000;
 
-    var dateElement;
+    let dateElement;
 
     if (secondsPast < 60) {
       dateElement = parseInt(secondsPast) + '초 전';
@@ -59,11 +59,14 @@ function TalkPreview() {
         <Cont key={index}>
           <Name>
             <FontAwesomeIcon icon={faUser} />
-            <h4>{talk.user}</h4>
+            <h5>{talk.user}</h5>
           </Name>
-          <h4>{talk.contents}</h4>
-          <h5>{talk.location}</h5>
-          <TimeSince date={talk.date} />
+          <h5>{talk.contents}</h5>
+
+          <Name>
+            <h5>{talk.location}</h5>
+            <TimeSince date={talk.date} />
+          </Name>
         </Cont>
       ))}
     </>
