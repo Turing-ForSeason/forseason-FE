@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { LocationList, Title, Wrap, Half } from './LiveTalkElements';
@@ -66,7 +67,6 @@ function LiveTalkList() {
             <ul>
               {roomList.map(room => (
                 <li key={room.id}>
-                  {/* <Link to={`/community/livetalk/talkroom/${encodeURIComponent(room.location)}`} onClick={() => onClickEnter(room.location)}>{room.location}</Link> */}
                   <a href="#" onClick={() => onClickEnter(room.location)}>
                     {room.location}
                   </a>
