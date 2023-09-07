@@ -250,7 +250,7 @@ function LiveTalkRoom(props) {
     let message;
     if (props.chat.type === 'TALK') {
       if (
-        props.chat.userUUID !== null ||
+        // props.chat.userUUID !== null ||
         props.chat.userUUID === userUUID.current
       ) {
         message = <MyMessage chat={props.chat} />;
