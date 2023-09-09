@@ -200,35 +200,35 @@ const UploadCoordi = () => {
         <UploadHashTag>
           <UploadHashTagLink
             to="#"
-            onClick={() => this.handleHashtagChange('더위 많이 타는 편')}
+            onClick={() => handleHashtagChange('더위 많이 타는 편')}
             active={selectedHashtags.includes('더위 많이 타는 편')}
           >
             # 더위 많이 타는 편
           </UploadHashTagLink>
           <UploadHashTagLink
             to="#"
-            onClick={() => this.handleHashtagChange('추위 많이 타는 편')}
+            onClick={() => handleHashtagChange('추위 많이 타는 편')}
             active={selectedHashtags.includes('추위 많이 타는 편')}
           >
             # 추위 많이 타는 편
           </UploadHashTagLink>
           <UploadHashTagLink
             to="#"
-            onClick={() => this.handleHashtagChange('데일리 룩')}
+            onClick={() => handleHashtagChange('데일리 룩')}
             active={selectedHashtags.includes('데일리 룩')}
           >
             # 데일리 룩
           </UploadHashTagLink>
           <UploadHashTagLink
             to="#"
-            onClick={() => this.handleHashtagChange('캐주얼 룩')}
+            onClick={() => handleHashtagChange('캐주얼 룩')}
             active={selectedHashtags.includes('캐주얼 룩')}
           >
             # 캐주얼 룩
           </UploadHashTagLink>
           <UploadHashTagLink
             to="#"
-            onClick={() => this.handleHashtagChange('유니크 룩')}
+            onClick={() => handleHashtagChange('유니크 룩')}
             active={selectedHashtags.includes('유니크 룩')}
           >
             # 유니크 룩
