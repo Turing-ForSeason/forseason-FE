@@ -45,6 +45,9 @@ const Navbar = () => {
         <NavLink to="/weather" activestyle="true">
           날씨
         </NavLink>
+        <NavLink to="/community/coordi/detail/1" activestyle="true">
+          코디자세히보기
+        </NavLink>
         <NavLink to="/community/coordi" activestyle="true">
           코디 모아보기
         </NavLink>
