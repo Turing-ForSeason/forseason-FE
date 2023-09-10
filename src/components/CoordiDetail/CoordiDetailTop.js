@@ -49,6 +49,7 @@ function CoordiDetailTop({ boardId }) {
             `http://localhost:8080/community/coordi/detail/board/${boardId}`,
             { headers },
           );
+          console.log('Response Data:', response.data);
           setBoard(response.data);
           setLikeCount(response.data.board.boardLikeNum);
           setIsLoading(false);
@@ -116,7 +117,7 @@ function CoordiDetailTop({ boardId }) {
         <CoordiDetailInfo>
           <CoordiDetailTag>UserContents</CoordiDetailTag>
           <CoordiDetailTitle>{board.boardTitle}</CoordiDetailTitle>
-          <CoordiDetailContents>{board.boardContent}</CoordiDetailContents>
+          <CoordiDetailContents>{board.boardContents}</CoordiDetailContents>
           <CoordiDetailHashtagContainer>
             {board.boardHashtags &&
               board.boardHashtags
