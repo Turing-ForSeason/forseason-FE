@@ -9,8 +9,6 @@ import {
   CommentUserName,
   CommentContent,
   CommentBox,
-  CommentSubmitButton,
-  CommentInput,
 } from './CoordiCommentElements';
 
 const CoordiComment = ({ comment, onNewCommentSubmit }) => {
@@ -25,6 +23,7 @@ const CoordiComment = ({ comment, onNewCommentSubmit }) => {
           commentContents: newComment,
         },
       );
+      console.log('Comment Response Data:', response.data);
       onNewCommentSubmit(newComment);
       setNewComment('');
     } catch (error) {
@@ -42,15 +41,6 @@ const CoordiComment = ({ comment, onNewCommentSubmit }) => {
           <CommentContent>{comment.commentContents}</CommentContent>
         </CommentUserInfo>
       </Comment>
-      <form onSubmit={handleCommentSubmit}>
-        <CommentInput
-          value={newComment}
-          onChange={e => setNewComment(e.target.value)}
-          placeholder="댓글을 작성해주세요"
-          rows={4}
-        />
-        <CommentSubmitButton type="submit">작성하기</CommentSubmitButton>
-      </form>
     </CommentBox>
   );
 };
