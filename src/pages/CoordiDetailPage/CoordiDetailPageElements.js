@@ -25,6 +25,7 @@ export const CommentWriteContainer = styled.div`
   height: 300px;
   justify-content: center;
   align-items: center;
+  margin-top: -50px;
 `;
 
 export const CommentInput = styled.textarea`
@@ -35,6 +36,7 @@ export const CommentInput = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 20px;
   margin-right: 20px;
+  margin-bottom: -18px;
 `;
 
 export const CommentSubmitButton = styled.button`
