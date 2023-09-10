@@ -3,7 +3,7 @@ import Navbar from '../../components/Nav/Nav';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'; // useParams 추가
 import CoordiDetailTop from '../../components/CoordiDetail/CoordiDetailTop';
-import CoordiComment from '../../components/CoordiDetail/CoordiComment';
+import CoordiComment from '../../components/CoordiDetail/CoordiComments';
 import {
   CommentTag,
   CommentInfo,

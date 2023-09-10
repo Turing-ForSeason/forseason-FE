@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../../components/Context/AuthProvider'; // 첫 번째 import 문만 유지
 import { useParams } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import {
@@ -35,20 +34,26 @@ import { BiCommentDetail, BiCurrentLocation } from 'react-icons/bi';
 function CoordiDetailTop({ boardId }) {
   const [board, setBoard] = useState({});
   const [likeCount, setLikeCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
-  const { auth } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getCoordiDetail = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/community/coordi/detail/board/${boardId}`,
-        );
+        const authToken = localStorage.getItem('Authorization');
+        console.log('Auth Token:', authToken);
+        if (authToken) {
+          const headers = {
+            Authorization: `Bearer ${authToken}`,
+          };
+          const response = await axios.get(
+            `http://localhost:8080/community/coordi/detail/board/${boardId}`,
+            { headers },
+          );
+          setBoard(response.data);
+          setLikeCount(response.data.board.boardLikeNum);
+          setIsLoading(false);
+        }
         // 응답 데이터 확인용 로그
-        console.log(response.data);
-        setBoard(response.data);
-        setLikeCount(response.data.board.boardLikeNum);
-        setIsLoading(false);
       } catch (error) {
         console.log('[CoordiDetail.js] getCoordiDetail() error...');
         console.log(error);
@@ -63,13 +68,14 @@ function CoordiDetailTop({ boardId }) {
   }
 
   const handleLikeClick = async () => {
-    if (!auth || !auth.token) {
+    const authToken = localStorage.getItem('Authorization');
+    if (!authToken) {
       alert('로그인이 필요합니다.');
       return;
     }
     try {
       const headers = {
-        Authorization: `Bearer ${auth.token}`,
+        Authorization: `Bearer ${authToken}`,
       };
       const requestBody = {};
       await axios.post(
