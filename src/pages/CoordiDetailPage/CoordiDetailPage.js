@@ -19,10 +19,18 @@ const CoordiDetail = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
+        const authToken = localStorage.getItem('Authorization');
+        const token = authToken ? authToken.replace('Bearer ', '') : null;
         const response = await axios.get(
           `http://localhost:8080/community/coordi/detail/comments/${boardId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
         );
-        setComments(response.data.comments);
+        console.log('Comments:', response.data);
+        setComments(response.data);
       } catch (error) {
         console.log('[CoordiDetailPage.js] fetchComments() error...');
         console.log(error);

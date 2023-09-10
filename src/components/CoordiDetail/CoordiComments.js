@@ -25,6 +25,7 @@ const CoordiComment = ({ comment, onNewCommentSubmit }) => {
           commentContents: newComment,
         },
       );
+      console.log('Comment Response Data:', response.data);
       onNewCommentSubmit(newComment);
       setNewComment('');
     } catch (error) {
