@@ -65,7 +65,7 @@ const CoordiDetail = () => {
       const authToken = localStorage.getItem('Authorization');
       const token = authToken ? authToken.replace('Bearer ', '') : null;
       const response = await axios.post(
-        `http://localhost:8080/community/coordi/detail/comments/${boardId}`,
+        `http://localhost:8080/community/coordi/detail/comments/create/${boardId}`,
         {
           commentContents: newComment,
         },
