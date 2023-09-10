@@ -44,7 +44,6 @@ export const CommentUserName = styled.nav`
 `;
 
 export const CommentContent = styled.nav`
-  height: 20px;
   width: 100%;
   margin-left: 5px;
   margin-top: 14px;
@@ -53,31 +52,11 @@ export const CommentContent = styled.nav`
   width: 100%;
   align-item: left;
   border-radius: 20px;
-  padding: 9px 9px 9px 19px;
+  padding: 0.7rem 1rem;
 `;
 
 export const CommentBox = styled.div`
-  /* Add your styling for the comment input box here */
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  background-color: #f8f8f8;
-`;
-
-export const CommentInput = styled.textarea`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: vertical;
-`;
-
-export const CommentSubmitButton = styled.button`
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-top: 2px;
+  margin-bottom: 15px;
+  background-color: white;
 `;
