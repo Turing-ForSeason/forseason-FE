@@ -4,7 +4,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import Navbar from '../../components/Nav/Nav';
-import styled from 'styled-components';
 import {
   Upload,
   UploadTop,
@@ -23,7 +22,9 @@ import {
   StyledSelectLocation,
 } from './UploadCoordiPageElements';
 
+/* 게시글 작성 / cloudinary 이미지 업로드 기능 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 const UploadCoordi = () => {
+  // 상태 변수 선언
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [selectedHashtags, setSelectedHashtags] = useState([]);
@@ -33,8 +34,8 @@ const UploadCoordi = () => {
   const [userToken, setUserToken] = useState('');
   const cloudinaryPreset = 'zxarsg3a';
 
+  /* 토큰 설정 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 가져오고 설정
     const authToken = localStorage.getItem('Authorization');
     console.log('Auth Token:', authToken);
     if (authToken) {
@@ -44,40 +45,49 @@ const UploadCoordi = () => {
     }
   }, []);
 
+  /* 게시글 제목 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   const handleTitleChange = event => {
     setTitle(event.target.value);
   };
 
+  /* 게시글 내용 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   const handleContentChange = (event, editor) => {
     const data = editor.getData();
     setContent(data);
   };
 
+  /* 게시글 해시태그 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   const handleHashtagChange = hashtag => {
     if (!selectedHashtags.includes(hashtag)) {
       setSelectedHashtags(prevState => [...prevState, hashtag]);
     }
   };
 
+  /* cloudinary 이미지 업로드 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   const getImageUrlFromCloudinary = async imageData => {
     try {
+      // formData 생성
       const formData = new FormData();
+      // formData에 file, upload 프리셋 추가
       formData.append('file', imageData);
       formData.append('upload_preset', cloudinaryPreset);
+      // body에 formData 객체 넣어서 전송
       const response = await axios.post(
         'https://api.cloudinary.com/v1_1/forseason/image/upload',
         formData,
       );
       return response.data.secure_url;
     } catch (error) {
+      // 이미지 업로드 실패한 경우
       console.error('cloudinary 이미지 업로드 오류', error);
       throw error;
     }
   };
 
+  /* 이미지 업로드 관리 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   const handleImageUpload = async acceptedFiles => {
     try {
-      // 첫 번째 이미지만 선택
+      // 첫 번째 이미지만 선택 (이미지 여러개 업로드 X)
       const file = acceptedFiles[0];
       const imageUrl = await getImageUrlFromCloudinary(file);
       setUploadedImages([imageUrl]);
@@ -87,30 +97,36 @@ const UploadCoordi = () => {
     }
   };
 
+  /* 게시글 장소 변경 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   const handleLocationChange = event => {
     setSelectedLocation(event.target.value);
   };
 
+  /* 게시글 업로드 함수 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   const uploadBoard = async () => {
     try {
+      // 헤더에 인증 토큰 넣기
       const axiosConfig = {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
       };
+      const imageUrls = uploadedImages.map(imageUrl => ({ imageUrl }));
 
+      // 서버 엔드포인트로 post 요청
       const response = await axios.post(
-        '/community/coordi/upload/board',
+        '/community/coordi/upload/board/',
         {
           boardTitle: title,
           boardContents: content,
           boardHashtags: selectedHashtags.join(' '),
-          boardPicture: uploadedImages,
+          boardPicture: imageUrls,
           boardLocation: selectedLocation,
         },
         axiosConfig,
       );
 
+      // 응답데이터 콘솔 표시
       const {
         boardId,
         boardTitle,
