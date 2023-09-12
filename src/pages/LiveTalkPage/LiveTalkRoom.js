@@ -37,7 +37,7 @@ function LiveTalkRoom(props) {
   const userProfilePicture = useRef('');
 
   const page = useRef(0);
-  const token = localStorage.getItem('Authorization');
+  const accessToken = localStorage.getItem('accessToken');
 
   const searchLocation = useLocation();
   const locationPathname = searchLocation.pathname;
@@ -48,7 +48,7 @@ function LiveTalkRoom(props) {
     axios
       .get('http://localhost:8080/talk/room/userCount', {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `${accessToken}`,
         },
         params: {
           location: roomLocation.current,
@@ -68,7 +68,7 @@ function LiveTalkRoom(props) {
     axios
       .get('http://localhost:8080/talk/talks', {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `${accessToken}`,
         },
         params: {
           page: page.current,
@@ -95,7 +95,7 @@ function LiveTalkRoom(props) {
     axios
       .get('http://localhost:8080/talk/user/init', {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `${accessToken}`,
         },
         params: {
           location: roomLocation.current,
@@ -129,7 +129,7 @@ function LiveTalkRoom(props) {
 
       stompClient.current.send(
         '/pub/talk/sendMessage',
-        { Authorization: `${token}` },
+        { Authorization: `${accessToken}` },
         JSON.stringify(chatMessage),
       );
       setMessageContent('');
@@ -167,13 +167,13 @@ function LiveTalkRoom(props) {
     stompClient.current.subscribe(
       `/sub/talk/room/${roomLocation.current}`,
       onMessageReceived,
-      { Authorization: `${token}` },
+      { Authorization: `${accessToken}` },
     );
 
     // 입장 메세지 날리기
     stompClient.current.send(
       '/pub/talk/enter',
-      { Authorization: `${token}` },
+      { Authorization: `${accessToken}` },
       JSON.stringify({
         type: 'ENTER',
         location: roomLocation.current,
@@ -212,7 +212,7 @@ function LiveTalkRoom(props) {
       // 연결
       console.log('stompClient 설정 됨');
       stompClient.current.connect(
-        { Authorization: `${token}` },
+        { Authorization: `${accessToken}` },
         onConnect,
         onError,
       );
@@ -222,7 +222,7 @@ function LiveTalkRoom(props) {
       if (stompClient.current) {
         stompClient.current.send(
           '/pub/talk/leave',
-          { Authorization: `${token}` },
+          { Authorization: `${accessToken}` },
           JSON.stringify({
             type: 'LEAVE',
             location: roomLocation.current,

@@ -39,11 +39,11 @@ function CoordiDetailTop({ boardId }) {
   useEffect(() => {
     const getCoordiDetail = async () => {
       try {
-        const authToken = localStorage.getItem('Authorization');
-        console.log('Auth Token:', authToken);
-        if (authToken) {
+        const accessToken = localStorage.getItem('accessToken');
+        console.log('Auth Token:', accessToken);
+        if (accessToken) {
           const headers = {
-            Authorization: `Bearer ${authToken}`,
+            Authorization: `${accessToken}`,
           };
           const response = await axios.get(
             `http://localhost:8080/community/coordi/detail/board/${boardId}`,
@@ -69,14 +69,14 @@ function CoordiDetailTop({ boardId }) {
   }
 
   const handleLikeClick = async () => {
-    const authToken = localStorage.getItem('Authorization');
-    if (!authToken) {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
       alert('로그인이 필요합니다.');
       return;
     }
     try {
       const headers = {
-        Authorization: `Bearer ${authToken}`,
+        Authorization: `${accessToken}`,
       };
       const requestBody = {};
       await axios.post(

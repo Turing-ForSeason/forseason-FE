@@ -14,10 +14,12 @@ const KakaoAuthHandle = props => {
           `http://localhost:8080/api/login/oauth2/code/kakao?code=${code}`,
         );
 
-        const token = res.data.result;
+        const accessToken = res.data.result.accessToken;
+        const refreshToken = res.data.result.refreshToken;
         console.log(res);
 
-        localStorage.setItem('Authorization', token);
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('token_body', JSON.stringify(res.data));
 
         window.location.href = '/';

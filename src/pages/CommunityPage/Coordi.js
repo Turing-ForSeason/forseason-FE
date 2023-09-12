@@ -20,7 +20,7 @@ function Coordi() {
 
   const [coordiList, setCoordiList] = useState([]);
 
-  const token = localStorage.getItem('Authorization');
+  const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     axios
@@ -28,7 +28,7 @@ function Coordi() {
         'http://localhost:8080/board/boardlist?page=0&size=3&sort=boardLikeNum,DESC',
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `${accessToken}`,
           },
         },
       )

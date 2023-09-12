@@ -36,7 +36,7 @@ const UploadCoordi = () => {
 
   /* 토큰 설정 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
   useEffect(() => {
-    const authToken = localStorage.getItem('Authorization');
+    const authToken = localStorage.getItem('accessToken');
     console.log('Auth Token:', authToken);
     if (authToken) {
       setUserToken(authToken);
@@ -108,7 +108,7 @@ const UploadCoordi = () => {
       // 헤더에 인증 토큰 넣기
       const axiosConfig = {
         headers: {
-          Authorization: `Bearer ${userToken}`,
+          Authorization: `${userToken}`, // 여기 바꿨는데 확인해주세요. (accessToken 자체가 Bearer를 붙어있음.)
         },
       };
       const imageUrls = uploadedImages.map(imageUrl => ({ imageUrl }));
