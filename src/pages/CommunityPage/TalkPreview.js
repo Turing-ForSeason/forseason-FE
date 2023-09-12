@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function TalkPreview() {
   const [talks, setTalks] = useState([]);
 
-  const token = localStorage.getItem('Authorization');
+  const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     axios
       .get('http://localhost:8080/talk/talklist?size=4', {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `${accessToken}`,
         },
       })
       .then(res => {

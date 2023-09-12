@@ -26,8 +26,8 @@ const CoordiDetail = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const authToken = localStorage.getItem('Authorization');
-        const token = authToken ? authToken.replace('Bearer ', '') : null;
+        const accessToken = localStorage.getItem('accessToken');
+        const token = accessToken ? accessToken.replace('Bearer ', '') : null;
         const response = await axios.get(
           `http://localhost:8080/community/coordi/detail/comments/${boardId}`,
           {
@@ -62,8 +62,8 @@ const CoordiDetail = () => {
   const handleNewCommentSubmit = async e => {
     e.preventDefault();
     try {
-      const authToken = localStorage.getItem('Authorization');
-      const token = authToken ? authToken.replace('Bearer ', '') : null;
+      const accessToken = localStorage.getItem('accessToken');
+      const token = accessToken ? accessToken.replace('Bearer ', '') : null;
       const response = await axios.post(
         `http://localhost:8080/community/coordi/detail/comments/create/${boardId}`,
         {

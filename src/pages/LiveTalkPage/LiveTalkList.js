@@ -7,7 +7,7 @@ import './LiveTalk.css';
 import TalkPreview from '../CommunityPage/TalkPreview';
 
 function LiveTalkList() {
-  const token = localStorage.getItem('Authorization');
+  const accessToken = localStorage.getItem('accessToken');
 
   const [roomList, setRoomList] = useState([]);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function LiveTalkList() {
     axios
       .get('http://localhost:8080/talk/rooms', {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `${accessToken}`,
         },
       })
       .then(response => {
@@ -33,7 +33,7 @@ function LiveTalkList() {
     axios
       .get('http://localhost:8080/talk/room', {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `${accessToken}`,
         },
         params: {
           location: roomLocation,

@@ -27,8 +27,8 @@ const Navbar = () => {
 
   useEffect(() => {
     // 페이지 로드 시 로컬 스토리지에서 토큰을 가져와 로그인 상태를 설정
-    const token = localStorage.getItem('Authorization');
-    if (token) {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -87,23 +87,32 @@ const Navbar = () => {
 export default Navbar;
 
 export const ServiceLogout = () => {
-  const token = localStorage.getItem('Authorization');
-  console.log(token);
+  const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  console.log(accessToken);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get('http://localhost:8080/logout/service', {
-        headers: {
-          Authorization: `${token}`,
+      .post(
+        'http://localhost:8080/auth/logout',
+        {
+          accessToken: accessToken,
+          refreshToken: refreshToken,
         },
-      })
+        {
+          headers: {
+            Authorization: `${accessToken}`,
+          },
+        },
+      )
       .then()
       .catch(error => {
         alert(error.response.data.message);
       });
 
-    localStorage.removeItem('Authorization');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
 
     // 로그아웃 후 메인 페이지로 이동
     navigate('/');
